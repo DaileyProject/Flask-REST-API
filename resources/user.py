@@ -33,7 +33,8 @@ class User(Resource):
 	)
 
 	def delete(self, username):
-		user = UserModel.find_by_username(username)
+		data = User.parser.parse_args()
+		user = UserModel.find_by_username(*data)
 		if user:
 			user.delete_from_db(username)
 			return {'message': 'User deleted successfully'}
