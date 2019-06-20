@@ -45,7 +45,7 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
-        return {'message': 'Item deleted.'}
+        return {'message': 'Item deleted.'}, 200
 
     @jwt_required()
     def put(self, name):

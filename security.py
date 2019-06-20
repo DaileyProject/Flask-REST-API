@@ -7,5 +7,5 @@ def authenticate(username, password):
 		return user
 
 def identity(payload):
-	user_id = payload['identity']
+	user_id = 'JWT ' + payload['identity']
 	return UserModel.find_by_id(user_id)
