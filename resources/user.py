@@ -33,4 +33,4 @@ class UserRegister(Resource):
 
 class UserList(Resource):
 	def get(self):
-		return {'users': [x.json() for x in UserModel.find_all()]}
+		return {'users': UserModel.find_all()}
