@@ -29,8 +29,8 @@ class User(Resource):
         store = UserModel.find_by_username(username)
         if store:
             store.delete_from_db()
-            return {'message': 'Store deleted successfully'}
-        return {'message': 'Store does not exist'}
+            return {'message': 'User deleted successfully'}
+        return {'message': 'User does not exist'}
 
 
 class UserList(Resource):
