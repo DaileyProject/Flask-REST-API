@@ -48,7 +48,7 @@ class UserAuth(Resource):
 		data = _user_parser.parse_args()
 		user = UserModel.find_by_username(data['username'])
 
-		if user and safe_str_cmp(user.password, data['password'])
+		if user and safe_str_cmp(user.password, data['password']):
 			access_token = create_access_token(identity=user.id, fresh=True)
 			refresh_toek = create_refresh_token(user.id)
 			return {
