@@ -25,21 +25,12 @@ class UserRegister(Resource):
 		return {"message": "User created successfully"}, 201
 
 class User(Resource):
-	parser = reqparse.RequestParser()
-	parser.add_argument('username',
-		type=str,
-		required=True,
-		help='Username is required'
-	)
-
-	def delete(self, username):
-		data = User.parser.parse_args()
-		user = UserModel.find_by_username(*data)
-		if user:
-			user.delete_from_db(username)
-			return {'message': 'User deleted successfully'}
-		return {'message': 'User does not exist'}
-
+    def delete(self, name):
+        store = StoreModel.find_by_name(name)
+        if store:
+            store.delete_from_db()
+            return {'message': 'Store deleted successfully'}
+        return {'message': 'Store does not exist'}
 
 
 class UserList(Resource):
