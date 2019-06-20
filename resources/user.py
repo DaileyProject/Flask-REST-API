@@ -29,12 +29,12 @@ class UserRegister(Resource):
 
 class User(Resource):
 	@jwt_required
-    def delete(self, username):
-        store = UserModel.find_by_username(username)
-        if store:
-            store.delete_from_db()
-            return {'message': 'User deleted successfully'}, 200
-        return {'message': 'User does not exist'}, 404
+	def delete(self, username):
+		store = UserModel.find_by_username(username)
+		if store:
+			store.delete_from_db()
+			return {'message': 'User deleted successfully'}, 200
+		return {'message': 'User does not exist'}, 404
 
 
 class UserList(Resource):
