@@ -11,7 +11,7 @@ from resources.store import Store, StoreList
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY']
+app.config['JWT_SECRET_KEY'] = "234uhfaf8923hfvaor2@r34jfa4#v234j!"
 api = Api(app)
 
 jwt = JWTManager(app)
