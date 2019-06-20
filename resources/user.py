@@ -25,8 +25,8 @@ class UserRegister(Resource):
 		return {"message": "User created successfully"}, 201
 
 class User(Resource):
-    def delete(self, name):
-        store = StoreModel.find_by_name(name)
+    def delete(self, username):
+        store = StoreModel.find_by_name(username)
         if store:
             store.delete_from_db()
             return {'message': 'Store deleted successfully'}
