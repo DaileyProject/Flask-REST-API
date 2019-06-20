@@ -25,7 +25,7 @@ class UserRegister(Resource):
 		return {"message": "User created successfully"}, 201
 
 class User(Resource):
-	parser = reparse.RequestParser()
+	parser = reqparse.RequestParser()
 	parser.add_argument('username',
 		type=str,
 		required=True,
