@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from werkzeug.security import safe_str_cmp
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token,jwt_required
 from models.user import UserModel
 
 _user_parser = reqparse.RequestParser()
@@ -28,6 +28,7 @@ class UserRegister(Resource):
 		return {"message": "User created successfully"}, 201
 
 class User(Resource):
+	@jwt_required
     def delete(self, username):
         store = UserModel.find_by_username(username)
         if store:
@@ -37,6 +38,7 @@ class User(Resource):
 
 
 class UserList(Resource):
+	@jwt_required
 	def get(self):
 		return {'users': [user.json() for user in UserModel.find_all()]}
 
