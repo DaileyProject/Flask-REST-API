@@ -19,7 +19,18 @@ class UserRegister(Resource):
 		if UserModel.find_by_username(data['username']):
 			return {'error': 'This username already exists'}, 400
 
-		user = UserModel(data['username'],data['password'])
+		user = UserModel(**data)
 		user.save_to_db()
 
 		return {"message": "User created successfully"}, 201
+
+	def delete(self, username):
+		user = UserModel.find_by_username(username)
+		if user:
+			user.delete_from_db(username)
+			return {'message': 'User deleted successfully'}
+		return {'message': 'User does not exist'}
+
+class UserList(Resource):
+	def get(self):
+		return {'users': [x.json() for x in UserModel.find_all()]}
