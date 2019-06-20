@@ -42,10 +42,14 @@ class Item(Resource):
 
     @jwt_required
     def delete(self, name):
+        claims = get_jwt_claims()
+        if not claims['is_admin']:
+            return {'message': 'User must be admin to delete items'}, 404
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
-        return {'message': 'Item deleted.'}, 200
+            return {'message': 'Item deleted.'}, 200
+        return {'message': 'Item does not exist.'}, 404
 
     @jwt_required
     def put(self, name):
