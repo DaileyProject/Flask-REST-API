@@ -7,6 +7,7 @@ from flask_jwt_extended import JWTManager
 from resources.user import UserRegister, UserList, User, UserAuth
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
+from models.user import UserModel
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
@@ -19,7 +20,7 @@ jwt = JWTManager(app)
 
 @jwt.user_claims_loader
 def add_claims_to_jwt(identity):
-	check_identity = User.UserModel.find_by_id(identity).json()
+	check_identity = UserModel.find_by_id(identity).json()
 	if check_identity['permissions'] == "admin":
 		return {'is_admin': True}
 	return {'is_admin': False}
