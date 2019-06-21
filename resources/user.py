@@ -14,6 +14,10 @@ _user_parser.add_argument('password',
 					required=True,
 					help='This field cannot be blank'
 				)
+_user_parser.add_argument('permissions',
+					type=str,
+					required=False,
+				)
 
 
 class UserRegister(Resource):
