@@ -11,6 +11,7 @@ from resources.store import Store, StoreList
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['JWT_SECRET_KEY'] = "234uhfaf8923hfvaor2@r34jfa4#v234j!"
 api = Api(app)
 
@@ -18,7 +19,8 @@ jwt = JWTManager(app)
 
 @jwt.user_claims_loader
 def add_claims_to_jwt(identity):
-	if identity == 1:
+	check_identity = UserModel.find_by_id(identity).json()
+	if check_identity['permissions'] == "admin":
 		return {'is_admin': True}
 	return {'is_admin': False}
 
