@@ -4,7 +4,8 @@ from flask_jwt_extended import (
 	create_refresh_token,
 	jwt_required,
 	jwt_refresh_token_required,
-	get_jwt_identity
+	get_jwt_identity,
+    fresh_jwt_required
 )
 from models.item import ItemModel
 
