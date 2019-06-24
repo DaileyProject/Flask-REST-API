@@ -9,7 +9,8 @@ from resources.user import (
 	UserList,
 	User,
 	UserAuth,
-	TokenRefresh
+	TokenRefresh,
+	UserLogout
 )
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
@@ -71,7 +72,7 @@ def revoked_token_callback():
 
 @jwt.token_in_blacklist_loader
 def check_blacklist(decrypted_token):
-	return decrypted_token['identity'] in BLACKLIST
+	return decrypted_token['jti'] in BLACKLIST
 
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
@@ -82,6 +83,7 @@ api.add_resource(User, '/users/<string:username>')
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserAuth, '/auth')
 api.add_resource(TokenRefresh, '/refresh')
+api.add_resource(UserLogout, '/logout')
 
 
 if __name__ == '__main__':
