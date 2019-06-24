@@ -22,7 +22,7 @@ class Item(Resource):
         help='Every item needs a store id'
     )
 
-    @jwt_required
+    @fresh_jwt_required
     def get(self, name):
         try:
             item = ItemModel.find_by_name(name)
@@ -73,5 +73,6 @@ class Item(Resource):
 
 
 class ItemList(Resource):
+    @fresh_jwt_required
     def get(self):
         return {'items': [item.json() for item in ItemModel.find_all()]}
